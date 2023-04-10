@@ -1,3 +1,4 @@
+use admin;
 DROP TABLE IF EXISTS usersContact, usersAddress, users;
 
 CREATE TABLE users (
