@@ -22,35 +22,21 @@ const getUserById = (req, res) => {
   })
 }
 
-const createUser = (req, res) => {
-  // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "INSERT INTO users (first_name, last_name)values (??, ??), INSERT INTO usersaddress (address, city, state, county, zip), (??, ??, ??, ??, ??)"
-
-
-
-//   SELECT users.first_name, users.last_name, usersaddress.address, usersaddress.city, usersaddress.state, usersaddress.zip, userscontact.email, userscontact.phone1
-// FROM ((users
-// INNER JOIN usersaddress ON users.id = usersaddress.user_id)
-// INNER JOIN userscontact ON users.id = userscontact.user_id);
-
-
-
-  // WHAT GOES IN THE BRACKETS
-  const replacements = [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.county, req.body.zip, req.body.email, req.body.phone1]
-  sql = mysql.format(sql, [replacements])
-
-  pool.query(sql, (err, results) => {
-    if (err) return handleSQLError(res, err)
-    return res.json({ newId: results.insertId });
-  })
-}
-
-
 // const createUser = (req, res) => {
 //   // INSERT INTO USERS FIRST AND LAST NAME 
-//   let sql = "INSERT INTO users (first_name, last_name) values (?, ?)"
+//   let sql = "INSERT INTO users (first_name, last_name)values (??, ??), INSERT INTO usersaddress (address, city, state, county, zip), (??, ??, ??, ??, ??)"
+
+
+
+// //   SELECT users.first_name, users.last_name, usersaddress.address, usersaddress.city, usersaddress.state, usersaddress.zip, userscontact.email, userscontact.phone1
+// // FROM ((users
+// // INNER JOIN usersaddress ON users.id = usersaddress.user_id)
+// // INNER JOIN userscontact ON users.id = userscontact.user_id);
+
+
+
 //   // WHAT GOES IN THE BRACKETS
-//   const replacements = [req.body.first_name, req.body.last_name]
+//   const replacements = [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.county, req.body.zip, req.body.email, req.body.phone1]
 //   sql = mysql.format(sql, [replacements])
 
 //   pool.query(sql, (err, results) => {
@@ -58,6 +44,20 @@ const createUser = (req, res) => {
 //     return res.json({ newId: results.insertId });
 //   })
 // }
+
+
+const createUser = (req, res) => {
+  // INSERT INTO USERS FIRST AND LAST NAME 
+  let sql = "INSERT INTO users (first_name, last_name) values (?, ?)"
+  // WHAT GOES IN THE BRACKETS
+  const replacements = [req.body.first_name, req.body.last_name]
+  sql = mysql.format(sql, [replacements])
+
+  pool.query(sql, (err, results) => {
+    if (err) return handleSQLError(res, err)
+    return res.json({ newId: results.insertId });
+  })
+}
 
 
 
